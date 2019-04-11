@@ -1,8 +1,10 @@
 # meta-web3
 
-> Web3 wrapper for ERC721, 725 and 735
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hexoul/meta-web3/master/LICENSE)
+[![NPM](https://img.shields.io/npm/v/meta-web3.svg)](https://www.npmjs.com/package/meta-web3)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-[![NPM](https://img.shields.io/npm/v/meta-web3.svg)](https://www.npmjs.com/package/meta-web3) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+> Web3 wrapper for ERC721, 725, 735 and governance
 
 ## Install
 
@@ -12,23 +14,28 @@ npm i meta-web3
 
 ## Components
 
+1. Registry
 1. AttestationAgencyRegistry
 1. Identity
 1. IdentityManager
 1. TopicRegistry
 1. AchievementManager
+1. BallotStorage
+1. EnvStorage
+1. Governance
+1. Staking
 
 ## Usage
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 // Web3
 import Web3 from 'web3';
-import web3config from './web3-config.json';
+import web3config from './web3-config.json'
 
 // Contracts
-import { contracts, getContractsAddresses, initContracts, TopicRegistry } from 'meta-web3';
+import { constants, contracts, getContractsAddresses, initContracts, TopicRegistry } from 'meta-web3'
 
 class Example extends Component {
 
@@ -39,7 +46,7 @@ class Example extends Component {
   async init() {
     initContracts({
       web3: new Web3(new Web3.providers.HttpProvider(web3config.url)),
-      netid: web3config.netid,
+      branch: constants.branch.TESTNET,
       identity: web3config.identity,
       privkey: web3config.privkey,
     }).then(async () => {
@@ -49,19 +56,19 @@ class Example extends Component {
         getAttestationAgencyNum: await contracts.aaRegistry.getAttestationAgencyNum(),
         getTotal: await contracts.topicRegistry.getTotal(),
       };
-      this.setState({ initDone: true });
+      this.setState({ initDone: true })
     });
   }
 
   async initDirectly() {
     // If you want to initialize each contract directly
     getContractsAddresses().then(async () => {
-      let topicRegistry = new TopicRegistry();
+      let topicRegistry = new TopicRegistry()
       topicRegistry.init({
         web3: new Web3(new Web3.providers.HttpProvider(web3config.url)),
       }).then(async () => {
-        let total = await topicRegistry.getTotal();
-        console.log('total', total);
+        let total = await topicRegistry.getTotal()
+        console.log('total', total)
       });
     });
   }
@@ -83,6 +90,7 @@ class Example extends Component {
 ```
 
 ## Test
+
 ```
 cd meta-web3
 npm start
@@ -97,10 +105,3 @@ npm start
 - [ERC735 spec.](https://github.com/ethereum/EIPs/issues/735)
 - [ERC725-735 imp.](https://github.com/mirceapasoi/erc725-735)
 - [OpenZeppelin imp.](https://github.com/OpenZeppelin/openzeppelin-solidity)
-
-## Thanks to
-[create-react-library](https://www.npmjs.com/package/create-react-library)
-
-## License
-
-MIT © [hexoul](https://github.com/hexoul)
