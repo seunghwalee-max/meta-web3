@@ -21,7 +21,7 @@ class Governance {
 
   async getVoteLength () {
     if (!this.govInstance || !this.govInstance.methods.voteLength) return
-    return this.govInstance.methods.voteLength.call()
+    return this.govInstance.methods.voteLength().call()
   }
 
   /**

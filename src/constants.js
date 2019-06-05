@@ -1,6 +1,6 @@
 const constants = {
-  organization: 'hexoul',
-  repoName: 'poa-chain-spec',
+  organization: 'metadium',
+  repoName: 'meta-web3-abis',
   addressesSourceFile: 'contracts.json',
   ABIsSources: {
     Registry: 'Registry.json',
