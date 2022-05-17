@@ -145,6 +145,24 @@ class Governance {
         .encodeABI(),
     };
   }
+
+  /**
+   *
+   * @param {bytes32} envName
+   * @param {uint256} envType
+   * @param {bytes} envVal
+   * @param {bytes} memo
+   */
+  addProposalToChangeEnv(envName, envType, envVal, memo) {
+    if (!this.govInstance || !this.govInstance.methods.addProposalToChangeEnv)
+      return;
+    return {
+      to: this.addresses.GOV_ADDRESS,
+      data: this.govInstance.methods
+        .addProposalToChangeEnv(envName, envType, envVal, memo)
+        .encodeABI(),
+    };
+  }
 }
 
 export { Governance };
