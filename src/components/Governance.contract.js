@@ -60,20 +60,31 @@ class Governance {
    * @param {uint256[2]} [port, lockAmount]
    * @param {bytes} memo
    */
-  addProposalToAddMember(member, name, enode, ip, [port, lockAmount], memo) {
+  addProposalToAddMember(
+    votingAddr,
+    stakingAddr,
+    newName,
+    newLockAmount,
+    node,
+    ip,
+    memo,
+    votDuration
+  ) {
     if (!this.govInstance || !this.govInstance.methods.addProposalToAddMember)
       return;
     return {
       to: this.addresses.GOV_ADDRESS,
       data: this.govInstance.methods
-        .addProposalToAddMember(
-          member,
-          name,
-          enode,
+        .addProposalToAddMember([
+          votingAddr,
+          stakingAddr,
+          newName,
+          newLockAmount,
+          node,
           ip,
-          [port, lockAmount],
-          memo
-        )
+          memo,
+          votDuration,
+        ])
         .encodeABI(),
     };
   }
