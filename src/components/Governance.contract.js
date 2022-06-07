@@ -33,6 +33,11 @@ class Governance {
     return this.govInstance.methods.isMember(addr).call();
   }
 
+  // for test
+  async getMember() {
+    return this.govInstance.methods.getMember(1).call();
+  }
+
   /**
    *
    * @param {uint256} idx
