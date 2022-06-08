@@ -33,11 +33,6 @@ class Governance {
     return this.govInstance.methods.isMember(addr).call();
   }
 
-  // for test
-  async getMember() {
-    return this.govInstance.methods.getMember(1).call();
-  }
-
   /**
    *
    * @param {uint256} idx
@@ -52,7 +47,7 @@ class Governance {
   }
 
   /**
-   *
+   * ! nxtmeta
    * @param {address} member
    * @param {address} staker
    * @param {bytes} name
@@ -90,6 +85,23 @@ class Governance {
           memo,
           duration,
         ])
+        .encodeABI(),
+    };
+  }
+
+  /**
+   * ! nxtmeta
+   * @param {address} newGovAddr
+   * @param {bytes} memo
+   * @params {uint256} duration
+   */
+  addProposalToChangeGov(newGovAddr, memo, duration) {
+    if (!this.govInstance || !this.govInstance.methods.addProposalToChangeGov)
+      return;
+    return {
+      to: this.addresses.GOV_ADDRESS,
+      data: this.govInstance.methods
+        .addProposalToChangeGov(newGovAddr, memo, duration)
         .encodeABI(),
     };
   }
@@ -147,23 +159,6 @@ class Governance {
       to: this.addresses.GOV_ADDRESS,
       data: this.govInstance.methods
         .addProposalToRemoveMember(member, lockAmount, memo)
-        .encodeABI(),
-    };
-  }
-
-  /**
-   *
-   * @param {address} newGovAddr
-   * @param {bytes} memo
-   * @params {uint256} duration
-   */
-  addProposalToChangeGov(newGovAddr, memo, duration) {
-    if (!this.govInstance || !this.govInstance.methods.addProposalToChangeGov)
-      return;
-    return {
-      to: this.addresses.GOV_ADDRESS,
-      data: this.govInstance.methods
-        .addProposalToChangeGov(newGovAddr, memo, duration)
         .encodeABI(),
     };
   }
