@@ -155,14 +155,15 @@ class Governance {
    *
    * @param {address} newGovAddr
    * @param {bytes} memo
+   * @params {uint256} duration
    */
-  addProposalToChangeGov(newGovAddr, memo) {
+  addProposalToChangeGov(newGovAddr, memo, duration) {
     if (!this.govInstance || !this.govInstance.methods.addProposalToChangeGov)
       return;
     return {
       to: this.addresses.GOV_ADDRESS,
       data: this.govInstance.methods
-        .addProposalToChangeGov(newGovAddr, memo)
+        .addProposalToChangeGov(newGovAddr, memo, duration)
         .encodeABI(),
     };
   }
