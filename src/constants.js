@@ -37,6 +37,14 @@ const constants = {
       TESTNET: true,
       EXPLORER: "https://testnetexplorer.metadium.com",
     },
+
+    31337:{
+      NAME: "TESTNET",
+      RPC: "http://127.0.0.1:8545",
+      BRANCH: "testnet",
+      TESTNET: true,
+      EXPLORER: "https://testnetexplorer.metadium.com"
+    }
   },
 };
 
